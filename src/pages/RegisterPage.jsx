@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      await register(values.fullName, values.email, values.identification);
+      await register(values.fullName,values.identification, values.email,);
       alert("Usuario registrado con éxito");
       resetForm();
       navigate("/login");
@@ -58,6 +58,7 @@ const RegisterPage = () => {
               <ErrorMessage name="identification" component="div" style={{ color: "red" }} />
             </div>
 
+            
             <div>
               <Field type="email" name="email" placeholder="Correo electrónico" />
               <ErrorMessage name="email" component="div" style={{ color: "red" }} />

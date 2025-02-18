@@ -1,4 +1,5 @@
 const API_URL = "https://localhost:7047/api/comic";
+
 const getAllComics = async (page = 1, pageSize = 10) => {
   const token = localStorage.getItem("token");
 

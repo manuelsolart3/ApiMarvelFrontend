@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { UseAuth } from "../context/AuthContext"; 
 
 const LoginPage = () => {
@@ -75,6 +75,9 @@ const LoginPage = () => {
           </Form>
         )}
       </Formik>
+      <div>
+        <p>¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link></p>
+      </div>
     </div>
   );
 };

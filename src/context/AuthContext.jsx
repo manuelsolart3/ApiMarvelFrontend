@@ -33,19 +33,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Función para registrar usuario
-  const register = async (name, email, identification) => {
-    const response = await fetch("https://localhost:7047/api/user/register", {
+  const register = async (fullName,identification, email ) => {
+    const response = await fetch("https://localhost:7047/api/user", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, identification }),
+      headers: { "Content-Type": "application/json" , "Accept": "application/json" },
+      body: JSON.stringify({FullName : fullName ,Identification :identification,Email: email}),
     });
-
     if (!response.ok) {
       throw new Error("Error en el registro");
     }
 
-    const data = await response.json();
-    setUser(data);
+    setUser({ fullName, identification, email });
   };
 
   const logout = () => {
@@ -53,7 +51,6 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem("token"); // Eliminar el token del localStorage
   };
-  
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, register }}>

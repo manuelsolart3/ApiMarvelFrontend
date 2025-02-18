@@ -79,26 +79,3 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 
-// Función para obtener todos los cómics (paginados)
-export const getComics = async (page = 1, pageSize = 10) => {
-  try {
-    const response = await axiosInstance.get(`/comic/all`, {
-      params: { Page: page, PageSize: pageSize },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error al obtener cómics:", error);
-    return null;
-  }
-};
-
-// Función para obtener un cómic por ID
-export const getComicById = async (id) => {
-  try {
-    const response = await axiosInstance.get(`/comic/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error al obtener el cómic:", error);
-    return null;
-  }
-};
