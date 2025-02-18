@@ -1,36 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllComics } from "../services/comicService";
+import { getFavoriteComics, addFavoriteComic } from "../services/favoriteService";
 
 const HomePage = () => {
   const [comics, setComics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [favorites, setFavorites] = useState(new Set());
-  const userId = localStorage.getItem("userId"); // Obtener el usuario desde el localStorage
+  const [favorites, setFavorites] = useState([]); // Para almacenar los cómics favoritos del usuario
+  const [message, setMessage] = useState(null); // Para mostrar el mensaje de éxito
 
-  // Fetch para los comics y favoritos del usuario
   useEffect(() => {
     const fetchComics = async () => {
       try {
-        const token = localStorage.getItem("token"); // Obtener el token del localStorage
-        if (!token) {
-          throw new Error("No token found, please login.");
-        }
-
-        const response = await fetch("https://localhost:7047/api/comic/all?Page=1&PageSize=10", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Error al cargar los cómics");
-        }
-
-        const result = await response.json();
-        setComics(result.list); // Asegúrate de acceder a la propiedad `list`
+        const result = await getAllComics(); // Obtener los cómics
+        setComics(result.list);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -38,73 +22,31 @@ const HomePage = () => {
       }
     };
 
-    const fetchFavorites = async () => {
+    const fetchFavoriteComics = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-
-        const response = await fetch(`https://localhost:7047/api/user/favorite-comics?userId=${userId}&page=1&pageSize=100`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Error al obtener los favoritos");
-        }
-
-        const result = await response.json();
-        const favoriteSet = new Set(result.list.map((comic) => comic.id));
-        setFavorites(favoriteSet);
+        const favoriteData = await getFavoriteComics(); // Obtener los favoritos del usuario
+        setFavorites(favoriteData.list); // Guardar los cómics favoritos
       } catch (err) {
-        console.error("Error al obtener favoritos", err.message);
+        setError(err.message);
       }
     };
 
     fetchComics();
-    fetchFavorites();
-  }, [userId]);
+    fetchFavoriteComics();
+  }, []);
 
-  // Maneja agregar o eliminar de favoritos
-  const toggleFavorite = async (comicId) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
+  const handleAddToFavorites = async (comicId) => {
     try {
-      if (favorites.has(comicId)) {
-        // Si ya es favorito, eliminarlo
-        await fetch(`https://localhost:7047/api/user/favorites/${comicId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-        setFavorites((prev) => {
-          const newFavorites = new Set(prev);
-          newFavorites.delete(comicId);
-          return newFavorites;
-        });
-      } else {
-        // Si no es favorito, agregarlo
-        await fetch("https://localhost:7047/api/user/favorites", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            userId,       // Enviar el userId desde el localStorage
-            comicId,      // Enviar el comicId de la publicación
-          }),
-        });
-        setFavorites((prev) => new Set(prev).add(comicId));
-      }
+      await addFavoriteComic(comicId); // Añadir el cómic a favoritos
+      setFavorites((prevFavorites) => [...prevFavorites, { comicId }]); // Actualizar el estado de favoritos
+      setMessage("Cómic añadido a favoritos!"); // Mostrar mensaje
     } catch (error) {
-      console.error("Error al actualizar favoritos", error);
+      setMessage("Error al añadir el cómic a favoritos.");
     }
+  };
+
+  const isFavorite = (comicId) => {
+    return favorites.some((favorite) => favorite.comicId === comicId); // Verificar si el cómic ya está en favoritos
   };
 
   if (loading) return <p>Cargando cómics...</p>;
@@ -113,15 +55,21 @@ const HomePage = () => {
   return (
     <div>
       <h1>Listado de Cómics</h1>
+      {message && <p>{message}</p>} {/* Mostrar mensaje si existe */}
+
       <ul>
         {comics.map((comic) => (
           <li key={comic.id}>
             <h3>{comic.title}</h3>
             <img src={comic.imageUrl} alt={comic.title} width={150} />
-            <button onClick={() => toggleFavorite(comic.id)}>
-              {favorites.has(comic.id) ? "❤️" : "🤍"}
-            </button>
             <Link to={`/comic/${comic.id}`}>Ver detalles</Link>
+
+            {/* Cambiar el texto del botón dependiendo de si el cómic ya está en favoritos */}
+            {!isFavorite(comic.id) ? (
+              <button onClick={() => handleAddToFavorites(comic.id)}>Añadir a favoritos</button>
+            ) : (
+              <button disabled>Ya en Favoritos</button>
+            )}
           </li>
         ))}
       </ul>

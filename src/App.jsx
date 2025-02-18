@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/HomePage";
-import FavoritesPage from "./pages/FavoritesPage";
+import FavoritePage from "./pages/FavoritePage";
 import ComicDetailPage from "./pages/ComicDetailPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -26,10 +26,10 @@ function App() {
           }
         />
         <Route
-          path="/favorites"
+          path="/favorite"
           element={
             <ProtectedRoute>
-              <FavoritesPage />
+              <FavoritePage />
             </ProtectedRoute>
           }
         />
