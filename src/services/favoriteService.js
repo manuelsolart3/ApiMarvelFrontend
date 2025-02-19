@@ -23,7 +23,7 @@ const getFavoriteComics = async (page = 1, pageSize = 10) => {
 
   const data = await response.json();
 
-  return data;  // Retorna la lista de favoritos
+  return data; 
 };
 
 

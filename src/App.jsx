@@ -13,27 +13,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Lógica para verificar si el usuario está autenticado
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token); // Verifica si hay un token
+    setIsAuthenticated(!!token); 
   }, []);
 
   return (
     <Router>
       <AuthProvider>
         <Routes>
-          {/* Si el usuario está autenticado, redirige al home */}
           <Route
             path="/"
             element={isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />}
           />
           
-          {/* Rutas públicas */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* Rutas protegidas */}
           <Route
             path="/home"
             element={

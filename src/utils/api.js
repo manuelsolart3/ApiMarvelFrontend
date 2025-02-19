@@ -6,7 +6,7 @@ export const useApi = () => {
   const fetchData = async (url, options = {}) => {
     const headers = {
       "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }), // Agregar token si existe
+      ...(token && { Authorization: `Bearer ${token}` }),
     };
 
     const response = await fetch(url, {

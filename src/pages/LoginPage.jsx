@@ -49,7 +49,8 @@ const LoginPage = () => {
   style={{ minHeight: "100vh" }}
 >
   <MDBRow className="w-100">
-    {/* Sección Izquierda */}
+  
+
     <MDBCol md="6" className="text-center text-md-start d-flex flex-column justify-content-center">
       <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: "hsl(218, 81%, 95%)" }}>
         Bienvenido de nuevo <br />
@@ -60,12 +61,12 @@ const LoginPage = () => {
       </p>
     </MDBCol>
 
-    {/* Sección Derecha */}
+
     <MDBCol md="6" className="position-relative d-flex flex-column align-items-center">
       <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
       <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
-      {/* Título LOG IN fuera del formulario */}
+
       <h1 className="fw-bold mb-4 text-center" 
         style={{ 
           color: " #ad1fff", 
@@ -94,7 +95,7 @@ const LoginPage = () => {
                   <ErrorMessage name="email" component="div" className="text-danger" />
                 </div>
 
-                {/* Campo Identificación */}
+
                 <div className="mb-3">
                   <Field
                     as={MDBInput}
@@ -107,7 +108,7 @@ const LoginPage = () => {
                   <ErrorMessage name="identification" component="div" className="text-danger" />
                 </div>
 
-                {/* Botón de Inicio de Sesión */}
+
                 <MDBBtn className="w-100 custom-button" size="md" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Verificando..." : "Iniciar Sesión"}
                 </MDBBtn>

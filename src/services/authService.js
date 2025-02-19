@@ -1,10 +1,8 @@
 import axios from "axios";
 import { UseAuth } from "../context/AuthContext";
 
-// URL base de la API
 const API_BASE_URL = "https://localhost:7047/api";
 
-// Instancia de Axios con configuración base
 const axiosInstance  = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -12,13 +10,13 @@ const axiosInstance  = axios.create({
   },
 });
 
-// Función para refrescar el token
+
 const refreshToken = async (token, setToken) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/refresh-token`, { token });
     const { newToken } = response.data;
 
-    setToken(newToken); // Guardamos el nuevo token en el contexto
+    setToken(newToken); 
 
     return newToken;
   } catch (error) {
@@ -28,7 +26,6 @@ const refreshToken = async (token, setToken) => {
 };
 
 
-// Agregar un interceptor para manejar el token expirado
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -42,16 +39,16 @@ axiosInstance.interceptors.response.use(
       const newToken = await refreshToken(token, setToken);
       originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
 
-      return axios(originalRequest); // Reintentar la solicitud original
+      return axios(originalRequest);
     }
 
     return Promise.reject(error);
   }
 );
 
-// Interceptor para agregar el token en los encabezados
+
 axiosInstance.interceptors.request.use((config) => {
-  const { token } = UseAuth(); // Obtener el token desde el contexto
+  const { token } = UseAuth();
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
@@ -60,18 +57,16 @@ axiosInstance.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Hook para acceder al token desde el contexto
 const useToken = () => {
   const { token } = UseAuth();
   return token;
 };
 
 
-// Agregar el token en los encabezados de todas las solicitudes
 axiosInstance.interceptors.request.use((config) => {
   const token = useToken();
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`; // Agregamos el token al encabezado
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 }, (error) => {

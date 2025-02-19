@@ -17,26 +17,25 @@ import {
   Card,
   Button,
   Navbar,
-  Nav,
 } from "react-bootstrap";
 
 const HomePage = () => {
   const [comics, setComics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [favorites, setFavorites] = useState([]); // Para almacenar los cómics favoritos del usuario
-  const [message, setMessage] = useState(null); // Para mostrar el mensaje de éxito
+  const [favorites, setFavorites] = useState([]); 
+  const [message, setMessage] = useState(null); 
   const navigate = useNavigate();
   const { logout } = UseAuth();
-  const [page, setPage] = useState(1); // Estado para la paginación
-  const [totalCount, setTotalCount] = useState(0); // Cantidad total de cómics
-  const pageSize = 10; // Número de cómics por página
+  const [page, setPage] = useState(1); 
+  const [totalCount, setTotalCount] = useState(0); 
+  const pageSize = 10; 
 
   useEffect(() => {
     const fetchComics = async () => {
       try {
         setLoading(true);
-        const result = await getAllComics(page, pageSize); // Obtener los cómics
+        const result = await getAllComics(page, pageSize); 
         setComics(result.list);
         setTotalCount(result.count);
       } catch (err) {
@@ -48,8 +47,8 @@ const HomePage = () => {
 
     const fetchFavoriteComics = async () => {
       try {
-        const favoriteData = await getFavoriteComics(); // Obtener los favoritos del usuario
-        setFavorites(favoriteData.list); // Guardar los cómics favoritos
+        const favoriteData = await getFavoriteComics(); 
+        setFavorites(favoriteData.list); 
       } catch (err) {
         setError(err.message);
       }
@@ -61,9 +60,9 @@ const HomePage = () => {
 
   const handleAddToFavorites = async (comicId) => {
     try {
-      await addFavoriteComic(comicId); // Añadir el cómic a favoritos
-      setFavorites((prevFavorites) => [...prevFavorites, { comicId }]); // Actualizar el estado de favoritos
-      setMessage("Cómic añadido a favoritos!"); // Mostrar mensaje
+      await addFavoriteComic(comicId);
+      setFavorites((prevFavorites) => [...prevFavorites, { comicId }]);
+      setMessage("Cómic añadido a favoritos!");
     } catch (error) {
       setMessage("Error al añadir el cómic a favoritos.");
     }
@@ -71,11 +70,11 @@ const HomePage = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/login"); // Redirige al login después de cerrar sesión
+    navigate("/login");
   };
 
   const isFavorite = (comicId) => {
-    return favorites.some((favorite) => favorite.comicId === comicId); // Verificar si el cómic ya está en favoritos
+    return favorites.some((favorite) => favorite.comicId === comicId); 
   };
 
   if (loading) return <p>Cargando cómics...</p>;
@@ -110,7 +109,6 @@ const HomePage = () => {
       </div>
     </Navbar>
 
-      {/* Banner */}
       {/* Banner */}
       <div className="banner">
         <img
@@ -164,7 +162,7 @@ const HomePage = () => {
           ))}
         </Row>
 
-        {/* Pagination */}
+        {/* Paginacion*/}
         <div className="pagination-container mt-4">
           <Button
             className="custom-button"

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 h1 {
-  font-weight: 800; /* Más grueso */
-  color: #ad1fff !important; /* Morado */
+  font-weight: 800; 
+  color: #ad1fff !important; 
 }
 .background-radial-gradient {
     background-color: hsl(218, 41%, 15%);
@@ -20,8 +20,8 @@ h1 {
         transparent 100%);
   }
   .custom-form {
-    background: linear-gradient(to right, #4466a2 , #995bcf); /* Degradado */
-    color: white !important; /* Texto blanco */
+    background: linear-gradient(to right, #4466a2 , #995bcf); 
+    color: white !important; 
   }
   
   #radius-shape-1 {
@@ -49,9 +49,8 @@ h1 {
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
   }
-  /* Botón personalizado */
 .custom-button {
-    background: linear-gradient(to right,#44006b, #ad1fff); /* Degradado rojo */
+    background: linear-gradient(to right,#44006b, #ad1fff); 
     color: white !important;
     border: none;
     font-weight: bold;
@@ -81,15 +80,15 @@ h1 {
     color: #b5b5b5 !important; 
   }
   
-  /* Cuando el usuario haga clic en el input (focus) */
+
 .form-control:focus {
-    background-color: #863faa !important; /* Un poco más claro */
-    border-color: #1ee3c6 !important; /* Morado brillante */
+    background-color: #863faa !important; 
+    border-color: #1ee3c6 !important; 
     box-shadow: 0 0 8px rgba(153, 0, 255, 0.6);
   }
 
   .error-message {
-    min-height: 20px; /* Reserva espacio para el error */
+    min-height: 20px; 
     color: #44006b;
     font-size: 14px;
     margin-top: 5px;

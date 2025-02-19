@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { UseAuth } from "../context/AuthContext"; // Ajusta la ruta según tu estructura
+import { UseAuth } from "../context/AuthContext"; 
 import "../styles/Register.css";
 import {
   MDBContainer,
@@ -53,7 +53,7 @@ const RegisterPage = () => {
   style={{ minHeight: "100vh" }}
 >
   <MDBRow className="w-100">
-    {/* Sección Izquierda */}
+
     <MDBCol md="6" className="text-center text-md-start d-flex flex-column justify-content-center">
       <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{ color: "hsl(218, 81%, 95%)" }}>
         Bienvenido a MarvelComics <br />
@@ -64,12 +64,12 @@ const RegisterPage = () => {
       </p>
     </MDBCol>
 
-    {/* Sección Derecha */}
+
     <MDBCol md="6" className="position-relative d-flex flex-column align-items-center">
       <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
       <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
-      {/* Título REGISTER fuera del formulario */}
+
       <h1 className="fw-bold mb-4 text-center" 
         style={{ 
           color: "hsl(218, 81%, 75%)", 
@@ -84,7 +84,7 @@ const RegisterPage = () => {
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ isSubmitting }) => (
               <Form>
-                {/* Campo Nombre Completo */}
+ 
                 <div className="mb-4">
                   <Field
                     as={MDBInput}
@@ -97,7 +97,6 @@ const RegisterPage = () => {
                   <ErrorMessage name="fullName" component="div" className="text-danger" />
                 </div>
 
-                {/* Campo Identificación */}
                 <div className="mb-4">
                   <Field
                     as={MDBInput}
@@ -110,7 +109,6 @@ const RegisterPage = () => {
                   <ErrorMessage name="identification" component="div" className="text-danger" />
                 </div>
 
-                {/* Campo Email */}
                 <div className="mb-4">
                   <Field
                     as={MDBInput}
@@ -123,7 +121,6 @@ const RegisterPage = () => {
                   <ErrorMessage name="email" component="div" className="text-danger" />
                 </div>
 
-                {/* Botón de Registro */}
                 <MDBBtn className="w-100 custom-button" size="md" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Registrando..." : "Registrarse"}
                 </MDBBtn>

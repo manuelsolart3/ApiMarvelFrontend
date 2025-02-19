@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  // Función para iniciar sesión
   const login = async (email, identification) => {
     const response = await fetch("https://localhost:7047/api/user/login", {
       method: "POST",
@@ -32,7 +31,6 @@ export const AuthProvider = ({ children }) => {
     setUser(data.user);
   };
 
-  // Función para registrar usuario
   const register = async (fullName,identification, email ) => {
     const response = await fetch("https://localhost:7047/api/user", {
       method: "POST",
@@ -49,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem("token"); // Eliminar el token del localStorage
+    localStorage.removeItem("token");
   };
 
   return (
