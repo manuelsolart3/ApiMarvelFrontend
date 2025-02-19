@@ -66,7 +66,7 @@
 }
 /* Banner Styles */
 .banner {
-  height: 400px;
+  height: 700px;
   position: relative;
   overflow: hidden;
   margin-top: 10px;
@@ -164,3 +164,24 @@
   padding: 2rem 0;
   margin-top: auto;
 }
+
+.login-register {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.80;
+  color: white !important;
+  margin: 0;
+}
+
+.title-register {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ad1fff !important;
+  background: linear-gradient(135deg, #c44ad9, #ad1fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 6px 3px 6px #ad1fff;
+  box-shadow: 2px 12px 10px rgba(210, 25, 25, 0.1);
+  animation: glowing 1.5s infinite alternate;
+}
+
+

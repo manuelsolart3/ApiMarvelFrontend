@@ -67,14 +67,14 @@ const LoginPage = () => {
       <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
 
-      <h1 className="fw-bold mb-4 text-center" 
+      <h1 className="fw-bold mb-4 text-center title-register " 
         style={{ 
           color: " #ad1fff", 
           borderBottom: "px solid hsl(218, 81%, 75%)", 
           display: "inline-block", 
           paddingBottom: "5px"
         }}>
-        LOG IN
+        Log In
       </h1>
 
       <MDBCard className="login-card bg-glass" style={{ maxWidth: "400px", width: "100%" }}>
@@ -83,7 +83,7 @@ const LoginPage = () => {
             {({ isSubmitting }) => (
               <Form>
                 {/* Campo Email */}
-                <div className="mb-3">
+                <div className="mb-3 login-register">
                   <Field
                     as={MDBInput}
                     label="Correo Electrónico"
@@ -96,7 +96,7 @@ const LoginPage = () => {
                 </div>
 
 
-                <div className="mb-3">
+                <div className="mb-3 login-register">
                   <Field
                     as={MDBInput}
                     label="Identificación"
@@ -116,7 +116,7 @@ const LoginPage = () => {
             )}
           </Formik>
 
-          <div className="text-center mt-3">
+          <div className="text-center login-register mt-3">
             <p className="text-white">¿No tienes cuenta? <Link to="/register" className="text-light">Regístrate aquí</Link></p>
           </div>
         </MDBCardBody>

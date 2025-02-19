@@ -112,7 +112,7 @@ const HomePage = () => {
       {/* Banner */}
       <div className="banner">
         <img
-          src="https://clarovideocdn6.clarovideo.net/PELICULAS/AVENGERSENDGAME/EXPORTACION_WEB/PT/AVENGERSENDGAMEWHORIZONTAL.jpg"
+          src="https://aiptcomics.com/ezoimgfmt/i0.wp.com/aiptcomics.com/wp-content/uploads/2025/01/april-2025-marvel-solicitations.jpg?ezimgfmt=ng%3Awebp%2Fngcb4%2Frs%3Adevice%2Frscb4-1&ssl=1&w=1200"
           alt="Comics Banner"
           className="banner-image"
         />

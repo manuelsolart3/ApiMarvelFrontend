@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { UseAuth } from "../context/AuthContext"; 
 import "../styles/Register.css";
 import {
@@ -70,13 +70,13 @@ const RegisterPage = () => {
       <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
 
-      <h1 className="fw-bold mb-4 text-center" 
+      <h1 className="fw-bold mb-4 text-center title-register " 
         style={{ 
           color: "hsl(218, 81%, 75%)", 
           display: "inline-block", 
           paddingBottom: "5px"
         }}>
-        REGISTER
+        REGISTRO
       </h1>
 
       <MDBCard className="my-5 bg-glass" style={{ maxWidth: "400px", width: "100%" }}>
@@ -85,7 +85,7 @@ const RegisterPage = () => {
             {({ isSubmitting }) => (
               <Form>
  
-                <div className="mb-4">
+                <div className="mb-4 login-register">
                   <Field
                     as={MDBInput}
                     label="Nombre Completo"
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                   <ErrorMessage name="fullName" component="div" className="text-danger" />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4  login-register">
                   <Field
                     as={MDBInput}
                     label="Identificación"
@@ -109,7 +109,7 @@ const RegisterPage = () => {
                   <ErrorMessage name="identification" component="div" className="text-danger" />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 login-register">
                   <Field
                     as={MDBInput}
                     label="Correo Electrónico"
@@ -121,12 +121,15 @@ const RegisterPage = () => {
                   <ErrorMessage name="email" component="div" className="text-danger" />
                 </div>
 
-                <MDBBtn className="w-100 custom-button" size="md" type="submit" disabled={isSubmitting}>
+                <MDBBtn className="w-100 custom-button" size="lg" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Registrando..." : "Registrarse"}
                 </MDBBtn>
               </Form>
             )}
           </Formik>
+          <div className="text-center  login-register -text mt-3 ">
+            <p className="text-white">¿Ya tienes una cuenta? <Link to="/login" className="text-light">Login</Link></p>
+          </div>
         </MDBCardBody>
       </MDBCard>
     </MDBCol>

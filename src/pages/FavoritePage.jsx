@@ -209,7 +209,7 @@ const FavoritePage = () => {
                       <Card.Body>
                         <Card.Title className="color-negro mb-3">{comic.title}</Card.Title>
                         <Card.Text className="color-negro mb-2">
-                          <span className="fw-bold color-secondary">Autor: </span>
+                          <span className="fw-bold  color-secondary">Autor: </span>
                           {comic.author}
                         </Card.Text>
                         <Card.Text className="color-negro mb-2">
