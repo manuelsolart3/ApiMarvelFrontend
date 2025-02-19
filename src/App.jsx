@@ -7,6 +7,8 @@ import ComicDetailPage from "./pages/ComicDetailPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./components/ProtectedRoute"
+import "bootstrap/dist/css/bootstrap.min.css";
+
  
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

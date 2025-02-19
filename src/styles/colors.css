@@ -1,0 +1,65 @@
+.color-primary {
+  color: #ad1fff;
+}
+
+.color-secondary {
+  color: #995bcf;
+}
+
+.color-primary-bg {
+  background-color: #ad1fff !important;
+  color: white !important;
+}
+.color-negro{
+  color: black !important
+}
+
+.color-background {
+  background-color: hsl(218, 41%, 15%);
+  background-image: radial-gradient(
+      650px circle at 0% 0%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1250px circle at 100% 100%,
+      #4466a2 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%
+    );
+  min-height: 100vh;
+  padding: 20px;
+}
+
+
+.btn-favorite {
+    background: linear-gradient(135deg, #ad1fff, #8d5ca6);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0 4px 10px rgba(173, 31, 255, 0.3);
+  }
+  
+  .btn-favorite:hover {
+    background: linear-gradient(135deg, #8d5ca6, #ad1fff);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(173, 31, 255, 0.5);
+  }
+  
+  .btn-favorite:active {
+    transform: scale(0.95);
+  }
+  
+  .btn-favorite:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  

@@ -1,9 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllComics } from "../services/comicService";
-import { getFavoriteComics, addFavoriteComic } from "../services/favoriteService";
+import {
+  getFavoriteComics,
+  addFavoriteComic,
+} from "../services/favoriteService";
 import { useNavigate } from "react-router-dom";
-import { UseAuth } from "../context/AuthContext"; 
+import { UseAuth } from "../context/AuthContext";
+import "../styles/Register.css";
+import "../styles/colors.css";
+import "../styles/generalStyles.css";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  Navbar,
+  Nav,
+} from "react-bootstrap";
 
 const HomePage = () => {
   const [comics, setComics] = useState([]);
@@ -30,7 +45,6 @@ const HomePage = () => {
         setLoading(false);
       }
     };
-    
 
     const fetchFavoriteComics = async () => {
       try {
@@ -54,7 +68,7 @@ const HomePage = () => {
       setMessage("Error al añadir el cómic a favoritos.");
     }
   };
-  
+
   const handleLogout = () => {
     logout();
     navigate("/login"); // Redirige al login después de cerrar sesión
@@ -68,63 +82,132 @@ const HomePage = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <h1>Listado de Cómics</h1>
-      {message && <p>{message}</p>} {/* Mostrar mensaje si existe */}
-
-      {/* Botón para ir a Favoritos */}
-      <button onClick={() => navigate("/favorite")} style={{ marginBottom: "10px" }}>
-        Ver Mis Favoritos
-      </button>
-
-      <ul style={{ flex: 1, overflowY: "auto" }}>
-        {comics.map((comic) => (
-          <li key={comic.id} style={{ marginBottom: "15px" }}>
-            <h3>{comic.title}</h3>
-            <img src={comic.imageUrl} alt={comic.title} width={150} />
-            <Link to={`/comic/${comic.id}`}>Ver detalles</Link>
-
-            {!isFavorite(comic.id) ? (
-              <button onClick={() => handleAddToFavorites(comic.id)}>Añadir a favoritos</button>
-            ) : (
-              <button disabled>Ya en Favoritos</button>
-            )}
-          </li>
-        ))}
-      </ul>
-
-      {/* Botón de Cerrar Sesión al final */}
-      <button 
-        onClick={handleLogout} 
-        style={{
-          marginTop: "auto",
-          backgroundColor: "red",
-          color: "white",
-          padding: "10px 15px",
-          border: "none",
-          cursor: "pointer",
-          borderRadius: "5px"
-        }}
-      >
-        Cerrar Sesión
-      </button>
-      <div style={{ marginTop: "20px" }}>
-            <button 
-              onClick={() => setPage(page - 1)} 
-              disabled={page === 1}
-            >
-              Anterior
-            </button>
-            <span style={{ margin: "0 10px" }}>Página {page}</span>
-            <button 
-              onClick={() => setPage(page + 1)} 
-              disabled={page * pageSize >= totalCount}
-            >
-              Siguiente
-            </button>
+    <div className="page-container">
+      {/* Navbar */}
+      <Navbar className="custom-navbar">
+        <div className="navbar-container">
+          <div className="navbar-brand-content">
+            <img
+              src="https://img.freepik.com/vector-gratis/ilustracion-vector-burbuja-explosion-comic-snarl_1142-7415.jpg"
+              alt="Comics Logo"
+              className="navbar-logo"
+            />
+            <h1 className="navbar-brand-text">Comics Universe</h1>
           </div>
+          <div className="navbar-actions">
+          <div className="navbar-buttons">
+            <Button
+              className="btn-favorite"
+              onClick={() => navigate("/favorite")}
+            >
+              Ver Mis Favoritos
+            </Button>
+            <Button className="custom-button" onClick={handleLogout}>
+              Cerrar Sesión
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Navbar>
+
+      {/* Banner */}
+      {/* Banner */}
+      <div className="banner">
+        <img
+          src="https://clarovideocdn6.clarovideo.net/PELICULAS/AVENGERSENDGAME/EXPORTACION_WEB/PT/AVENGERSENDGAMEWHORIZONTAL.jpg"
+          alt="Comics Banner"
+          className="banner-image"
+        />
+        <div className="banner-content">
+          <h1 className="banner-title">Comics Universe</h1>
+          <p className="banner-subtitle">
+            Descubre mundos infinitos de historias
+          </p>
+        </div>
+      </div>
+
+      <Container fluid className="color-white p#e9dfeex-grow-1">
+        <h1 className="color-white text-center main-title  margin-top: 10px;">aass</h1>
+
+        <Row className="justify-content-center g-4">
+          {comics.map((comic) => (
+            <Col xs={12} sm={6} md={4} lg={3} key={comic.id}>
+              <Card className="comic-card">
+                <Link
+                  to={`/comic/${comic.id}`}
+                  className="text-decoration-none"
+                >
+                  <Card.Img src={comic.imageUrl} alt={comic.title} />
+                </Link>
+                <Card.Body>
+                  <Link
+                    to={`/comic/${comic.id}`}
+                    className="text-decoration-none"
+                  >
+                    <h5 className="card-title">{comic.title}</h5>
+                  </Link>
+                  {!isFavorite(comic.id) ? (
+                    <Button
+                      className="custom-button w-100"
+                      onClick={() => handleAddToFavorites(comic.id)}
+                    >
+                      Añadir a Favoritos
+                    </Button>
+                  ) : (
+                    <Button className="btn-in-favorites w-100" disabled>
+                      Ya en Favoritos
+                    </Button>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        {/* Pagination */}
+        <div className="pagination-container mt-4">
+          <Button
+            className="custom-button"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+          >
+            Anterior
+          </Button>
+          <span className="mx-3">Página {page}</span>
+          <Button
+            className="custom-button"
+            onClick={() => setPage(page + 1)}
+            disabled={page * pageSize >= totalCount}
+          >
+            Siguiente
+          </Button>
+        </div>
+      </Container>
+
+      {/* Footer */}
+      <footer className="custom-footer">
+        <Container>
+          <Row className="gy-4">
+            <Col md={4}>
+              <h5 className="footer-title">Contacto</h5>
+              <p className="mb-1">📧 info@comics.com</p>
+              <p className="mb-1">📞 +34 900 123 456</p>
+            </Col>
+            <Col md={4}>
+              <h5 className="footer-title">Redes Sociales</h5>
+              <p className="mb-1">📱 Instagram: @comicsuniverse</p>
+              <p className="mb-1">🐦 Twitter: @comics_universe</p>
+            </Col>
+            <Col md={4}>
+              <h5 className="footer-title">Enlaces</h5>
+              <p className="mb-1">Términos y Condiciones</p>
+              <p className="mb-1">Política de Privacidad</p>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
     </div>
   );
-}
+};
 
 export default HomePage;
