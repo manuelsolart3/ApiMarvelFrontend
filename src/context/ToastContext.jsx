@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { MDBBtn } from 'mdb-react-ui-kit';
-import "../styles/GeneralStyles.css"; // Asegúrate de que la ruta es correcta
+import "../styles/GeneralStyles.css"; 
 
 const ToastContext = createContext();
 
@@ -16,9 +16,9 @@ export const ToastProvider = ({ children }) => {
     setToast({ show: false, message: '', title: '' });
   };
 
-  // Estilos personalizados para el toast
+
   const toastStyle = {
-    backgroundColor: '#ad1fff', // Color de fondo morado
+    backgroundColor: '#ad1fff', 
     color: 'white',
     minWidth: '350px',
     borderRadius: '10px',
@@ -27,7 +27,7 @@ export const ToastProvider = ({ children }) => {
   };
 
   const toastHeaderStyle = {
-    backgroundColor: '#9000ff', // Un tono más oscuro para el header
+    backgroundColor: '#9000ff', 
     color: 'white',
     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
     padding: '0.75rem 1rem'

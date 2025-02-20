@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UseAuth } from "../context/AuthContext";
 
-const API_BASE_URL = "https://localhost:7047/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const axiosInstance  = axios.create({
   baseURL: API_BASE_URL,

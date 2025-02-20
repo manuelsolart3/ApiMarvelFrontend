@@ -1,5 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
+const API_USER_URL  = import.meta.env.VITE_API_BASE_URL;
+export const API_URL = `${API_USER_URL}/user`;
 
 const AuthContext = createContext();
 
@@ -16,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, identification) => {
-    const response = await fetch("https://localhost:7047/api/user/login", {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, identification }),
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (fullName,identification, email ) => {
-    const response = await fetch("https://localhost:7047/api/user", {
+    const response = await fetch(`${API_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" , "Accept": "application/json" },
       body: JSON.stringify({FullName : fullName ,Identification :identification,Email: email}),

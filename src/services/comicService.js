@@ -1,4 +1,5 @@
-const API_URL = "https://localhost:7047/api/comic";
+const API_USER_URL = import.meta.env.VITE_API_BASE_URL;
+export const  API_URL= `${API_USER_URL}/comic`;
 
 const getAllComics = async (page = 1, pageSize = 10) => {
   const token = localStorage.getItem("token");
