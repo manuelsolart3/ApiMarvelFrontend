@@ -2,11 +2,11 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: rgb(248, 243, 255);
 }
 
 .custom-navbar {
-  background: linear-gradient(135deg, #ad1fff, #44006b);
+  background: linear-gradient(135deg,#44006b, #845a99dc );
   box-shadow: 0 4px 15px rgba(173, 31, 255, 0.3);
   height: 60px;
   position: fixed;
@@ -30,21 +30,22 @@
 .navbar-brand-content {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 2.20rem;
 }
 
 .navbar-logo {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 8px;
 }
 
 .navbar-brand-text {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.55rem;
-  font-weight: bold;
+  font-size: 2rem;
   color: white !important;
   margin: 0;
+  box-shadow: 6px 4px 20px rgba(84, 4, 205, 0.629);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.626);
 }
 
 .navbar-actions {
@@ -137,7 +138,7 @@
 
 /* Button Styles */
 .custom-button, .btn-favorite {
-  background: linear-gradient(135deg, #c52fe0, #691c87) !important;
+  background: linear-gradient(135deg, #7606b2c7, #9b04ba85) !important;
   border: none !important;
   color: white !important;
   padding: 0.5rem 1rem;
@@ -151,7 +152,7 @@
 
 /* Footer */
 .custom-footer {
-  background: linear-gradient(135deg, #ad1fff, #44006b);
+  background: linear-gradient(135deg,#44006b, #b670d9f3 );
   color: white;
   padding: 2rem 0;
   margin-top: auto;
@@ -159,7 +160,7 @@
 
 .btn-in-favorites
 {
-   background: linear-gradient(135deg, #ad1fff, #44006b);
+   background: linear-gradient(135deg, #535664c0, #484e62c0);
   color: white;
   padding: 2rem 0;
   margin-top: auto;
@@ -183,5 +184,63 @@
   box-shadow: 2px 12px 10px rgba(210, 25, 25, 0.1);
   animation: glowing 1.5s infinite alternate;
 }
+.toast {
+  animation: slideIn 0.3s ease-out;
+}
 
+.toast-button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast.hide {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.navbar-logo-container {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.navbar-logo {
+  border: 3px solid #ad1fff;
+  border-radius: 50%;
+  box-shadow: 0px 0px 15px rgba(173, 31, 255, 0.6);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.navbar-logo:hover {
+  box-shadow: 0px 0px 25px rgba(173, 31, 255, 0.8);
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+}
 

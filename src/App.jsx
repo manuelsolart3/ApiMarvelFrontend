@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
 import HomePage from "./pages/HomePage";
 import FavoritePage from "./pages/FavoritePage";
 import ComicDetailPage from "./pages/ComicDetailPage";
@@ -21,6 +22,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <ToastProvider>
         <Routes>
           <Route
             path="/"
@@ -55,6 +57,7 @@ function App() {
             }
           />
         </Routes>
+        </ToastProvider>
       </AuthProvider>
     </Router>
   );

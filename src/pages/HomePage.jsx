@@ -10,32 +10,26 @@ import { UseAuth } from "../context/AuthContext";
 import "../styles/Register.css";
 import "../styles/colors.css";
 import "../styles/generalStyles.css";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Navbar,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Navbar } from "react-bootstrap";
+import { BiLogoCreativeCommons } from "react-icons/bi";
 
 const HomePage = () => {
   const [comics, setComics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [favorites, setFavorites] = useState([]); 
-  const [message, setMessage] = useState(null); 
+  const [favorites, setFavorites] = useState([]);
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const { logout } = UseAuth();
-  const [page, setPage] = useState(1); 
-  const [totalCount, setTotalCount] = useState(0); 
-  const pageSize = 10; 
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const pageSize = 10;
 
   useEffect(() => {
     const fetchComics = async () => {
       try {
         setLoading(true);
-        const result = await getAllComics(page, pageSize); 
+        const result = await getAllComics(page, pageSize);
         setComics(result.list);
         setTotalCount(result.count);
       } catch (err) {
@@ -47,8 +41,8 @@ const HomePage = () => {
 
     const fetchFavoriteComics = async () => {
       try {
-        const favoriteData = await getFavoriteComics(); 
-        setFavorites(favoriteData.list); 
+        const favoriteData = await getFavoriteComics();
+        setFavorites(favoriteData.list);
       } catch (err) {
         setError(err.message);
       }
@@ -74,7 +68,7 @@ const HomePage = () => {
   };
 
   const isFavorite = (comicId) => {
-    return favorites.some((favorite) => favorite.comicId === comicId); 
+    return favorites.some((favorite) => favorite.comicId === comicId);
   };
 
   if (loading) return <p>Cargando cómics...</p>;
@@ -86,28 +80,30 @@ const HomePage = () => {
       <Navbar className="custom-navbar">
         <div className="navbar-container">
           <div className="navbar-brand-content">
-            <img
-              src="https://img.freepik.com/vector-gratis/ilustracion-vector-burbuja-explosion-comic-snarl_1142-7415.jpg"
-              alt="Comics Logo"
-              className="navbar-logo"
-            />
+            <div className="navbar-logo-container">
+              <img
+                src="https://img.freepik.com/vector-premium/pajaro-premium-logo-morado_97365-202.jpg?w=740"
+                alt="Comics Logo"
+                className="navbar-logo"
+              />
+            </div>
             <h1 className="navbar-brand-text">Comics Universe</h1>
           </div>
           <div className="navbar-actions">
-          <div className="navbar-buttons">
-            <Button
-              className="btn-favorite"
-              onClick={() => navigate("/favorite")}
-            >
-              Ver Mis Favoritos
-            </Button>
-            <Button className="custom-button" onClick={handleLogout}>
-              Cerrar Sesión
-            </Button>
+            <div className="navbar-buttons">
+              <Button
+                className="btn-favorite"
+                onClick={() => navigate("/favorite")}
+              >
+                Ver Mis Favoritos
+              </Button>
+              <Button className="custom-button" onClick={handleLogout}>
+                Cerrar Sesión
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </Navbar>
+      </Navbar>
 
       {/* Banner */}
       <div className="banner">
@@ -121,11 +117,14 @@ const HomePage = () => {
           <p className="banner-subtitle">
             Descubre mundos infinitos de historias
           </p>
+          <BiLogoCreativeCommons />
         </div>
       </div>
 
       <Container fluid className="color-white p#e9dfeex-grow-1">
-        <h1 className="color-white text-center main-title  margin-top: 10px;">aass</h1>
+        <h1 className="color-lorem text-center main-title  margin-top: 10px;">
+          Lorem
+        </h1>
 
         <Row className="justify-content-center g-4">
           {comics.map((comic) => (
@@ -153,7 +152,7 @@ const HomePage = () => {
                     </Button>
                   ) : (
                     <Button className="btn-in-favorites w-100" disabled>
-                      Ya en Favoritos
+                      Añadido en favoritos
                     </Button>
                   )}
                 </Card.Body>
@@ -171,7 +170,7 @@ const HomePage = () => {
           >
             Anterior
           </Button>
-          <span className="mx-3">Página {page}</span>
+          <span className="mx-3 color-negro">Página {page}</span>
           <Button
             className="custom-button"
             onClick={() => setPage(page + 1)}
@@ -180,6 +179,7 @@ const HomePage = () => {
             Siguiente
           </Button>
         </div>
+        <h1 className="color-lorem text-center main-title  margin-top: 10px;"> lorem</h1>
       </Container>
 
       {/* Footer */}

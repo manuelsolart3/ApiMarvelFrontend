@@ -14,6 +14,9 @@
   color: rgb(94, 89, 95) !important;
   font-family: 'Poppins', sans-serif;
 }
+.color-lorem{
+  color: #f8f3ff !important;
+}
 
 .color-background {
   background-color: hsl(218, 41%, 15%);
