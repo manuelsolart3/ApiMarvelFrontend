@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 const API_USER_URL  = import.meta.env.VITE_API_BASE_URL;
-export const API_URL = `${API_USER_URL}/user`;
+export const API_URL = `${API_USER_URL}/api/user`;
 
 const AuthContext = createContext();
 

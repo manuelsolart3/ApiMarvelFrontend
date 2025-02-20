@@ -1,6 +1,6 @@
 // favoriteService.js
 const API_USER_URL  = import.meta.env.VITE_API_BASE_URL;
-export const API_URL = `${API_USER_URL}/user`;
+export const API_URL = `${API_USER_URL}/api/user`;
 
 //Get
 const getFavoriteComics = async (page = 1, pageSize = 10) => {
