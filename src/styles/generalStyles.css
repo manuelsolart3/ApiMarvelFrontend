@@ -180,7 +180,7 @@
   background: linear-gradient(135deg, #c44ad9, #ad1fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 6px 3px 6px #ad1fff;
+  text-shadow: 1px 0px 6px #ad1fff;
   box-shadow: 2px 12px 10px rgba(210, 25, 25, 0.1);
   animation: glowing 1.5s infinite alternate;
 }
@@ -244,3 +244,19 @@
   margin-top: 4rem;
 }
 
+.banner-image {
+     opacity: 0;
+   contain: layout paint;
+    transform: translateZ(0);
+   will-change: opacity;
+    transition: opacity 0.2s ease-out;
+ }
+
+.banner {
+  contain: layout;
+}
+
+.card-img-container {
+  aspect-ratio: 2.5/3;
+   overflow: hidden;
+ }

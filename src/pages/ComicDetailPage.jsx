@@ -5,7 +5,7 @@ import { UseAuth } from "../context/AuthContext";
 import { Container, Row, Col, Button,
   Navbar, } from 'react-bootstrap';
 import "../styles/generalStyles.css";
-import { BsArrowLeft } from "react-icons/bs"; 
+import { BsArrowLeft } from "react-icons/bs";
 
 
 const ComicDetailPage = () => {

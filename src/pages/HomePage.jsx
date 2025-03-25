@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState,useCallback, lazy, Suspense  } from "react";
+import { Link, useNavigate  } from "react-router-dom";
 import { getAllComics } from "../services/comicService";
-import {
-  getFavoriteComics,
-  addFavoriteComic,
+import {getFavoriteComics,addFavoriteComic,
 } from "../services/favoriteService";
-import { useNavigate } from "react-router-dom";
 import { UseAuth } from "../context/AuthContext";
 import "../styles/Register.css";
 import "../styles/colors.css";
@@ -13,16 +10,17 @@ import "../styles/generalStyles.css";
 import { Container, Row, Col, Card, Button, Navbar } from "react-bootstrap";
 import { BiLogoCreativeCommons } from "react-icons/bi";
 
+
 const HomePage = () => {
   const [comics, setComics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [message, setMessage] = useState(null);
-  const navigate = useNavigate();
-  const { logout } = UseAuth();
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const navigate = useNavigate();
+  const { logout } = UseAuth();
   const pageSize = 10;
 
   useEffect(() => {
@@ -52,13 +50,19 @@ const HomePage = () => {
     fetchFavoriteComics();
   }, [page]);
 
+  
+
   const handleAddToFavorites = async (comicId) => {
     try {
       await addFavoriteComic(comicId);
       setFavorites((prevFavorites) => [...prevFavorites, { comicId }]);
       setMessage("Cómic añadido a favoritos!");
+      
+      // Auto-clear message after 3 seconds
+      setTimeout(() => setMessage(null), 3000);
     } catch (error) {
       setMessage("Error al añadir el cómic a favoritos.");
+      setTimeout(() => setMessage(null), 3000);
     }
   };
 
@@ -82,9 +86,12 @@ const HomePage = () => {
           <div className="navbar-brand-content">
             <div className="navbar-logo-container">
               <img
-                src="https://img.freepik.com/vector-premium/pajaro-premium-logo-morado_97365-202.jpg?w=740"
+                src="/logoPajaro.jpg"
                 alt="Comics Logo"
                 className="navbar-logo"
+                width="60"
+                height="60"
+                loading="eager"
               />
             </div>
             <h1 className="navbar-brand-text">Comics Universe</h1>
@@ -105,13 +112,33 @@ const HomePage = () => {
         </div>
       </Navbar>
 
-      {/* Banner */}
-      <div className="banner">
-        <img
-          src="https://aiptcomics.com/ezoimgfmt/i0.wp.com/aiptcomics.com/wp-content/uploads/2025/01/april-2025-marvel-solicitations.jpg?ezimgfmt=ng%3Awebp%2Fngcb4%2Frs%3Adevice%2Frscb4-1&ssl=1&w=1200"
-          alt="Comics Banner"
-          className="banner-image"
-        />
+     {/* Banner */}
+     <div className="banner">
+        <picture>
+          {/* Provide WebP and fallback formats */}
+          <source srcSet="/logo2.webp" type="image/webp" />
+          <source srcSet="/logo2.jpg" type="image/jpeg" />
+          <img
+            src="/logo2.webp"
+            alt="Comics Banner"
+            className="banner-image"
+            width="800"  
+            height="400"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            style={{
+              willChange: "auto",
+              contentVisibility: "auto",
+              contain: "layout paint"
+            }}
+            onLoad={(e) => {
+              e.target.style.opacity = 1;
+              // Remove the onLoad handler after it runs once
+              e.target.onload = null;
+            }}
+          />
+        </picture>
         <div className="banner-content">
           <h1 className="banner-title">Comics Universe</h1>
           <p className="banner-subtitle">
@@ -121,6 +148,7 @@ const HomePage = () => {
         </div>
       </div>
 
+
       <Container fluid className="color-white p#e9dfeex-grow-1">
         <h1 className="color-lorem text-center main-title  margin-top: 10px;">
           Lorem
@@ -129,14 +157,24 @@ const HomePage = () => {
         <Row className="justify-content-center g-4">
           {comics.map((comic) => (
             <Col xs={12} sm={6} md={4} lg={3} key={comic.id}>
-              <Card className="comic-card">
+              <Card className="comic-card h-100">
                 <Link
                   to={`/comic/${comic.id}`}
                   className="text-decoration-none"
                 >
-                  <Card.Img src={comic.imageUrl} alt={comic.title} />
+                    <div className="card-img-container">
+                    <img 
+                      src={comic.imageUrl} 
+                      alt={comic.title}
+                      className="card-img-top"
+                      loading="lazy"
+                      width="300"
+                      height="450"
+                    />
+                  </div>
+
                 </Link>
-                <Card.Body>
+                <Card.Body className="d-flex flex-column">
                   <Link
                     to={`/comic/${comic.id}`}
                     className="text-decoration-none"
@@ -162,23 +200,25 @@ const HomePage = () => {
         </Row>
 
         {/* Paginacion*/}
-        <div className="pagination-container mt-4">
+        <nav className="pagination-container mt-4" aria-label="Navegación de páginas">
           <Button
             className="custom-button"
             onClick={() => setPage(page - 1)}
             disabled={page === 1}
+            aria-label="Página anterior"
           >
-            Anterior
+             Anterior
           </Button>
           <span className="mx-3 color-negro">Página {page}</span>
           <Button
             className="custom-button"
             onClick={() => setPage(page + 1)}
             disabled={page * pageSize >= totalCount}
+            aria-label="Página siguiente"
           >
-            Siguiente
+               Siguiente
           </Button>
-        </div>
+        </nav>
         <h1 className="color-lorem text-center main-title  margin-top: 10px;"> lorem</h1>
       </Container>
 
